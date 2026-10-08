@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e85d04">
+<title>Sweet Crumbs — Complete Bakery Experience</title>
+<style>
+:root{
+  --orange:#e85d04;--orange2:#f48c06;--cream:#fff8f0;--ink:#202124;--muted:#6b7280;
+  --line:#ece7e1;--white:#fff;--green:#18864b;--red:#d93025;--shadow:0 10px 30px rgba(32,33,36,.09);
+  --radius:18px;--max:1380px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}.hidden{display:none!important}.container{width:min(var(--max),calc(100% - 40px));margin:auto}
+.topbar{background:#201b18;color:#fff;font-size:13px}.topbar .container{min-height:36px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.topbar b{color:#ffd7a8}.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.navrow{height:76px;display:grid;grid-template-columns:auto minmax(260px,1fr) auto;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;gap:10px;font-size:23px;font-weight:900}.logo-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--orange),#ffb703);display:grid;place-items:center;color:#fff;font-size:21px;box-shadow:0 8px 18px #e85d0430}
+.search{height:48px;border:1px solid var(--line);border-radius:14px;background:#fafafa;display:flex;align-items:center;padding:0 14px;gap:10px}
+.search input{border:0;outline:0;background:transparent;width:100%;font-size:14px}.navactions{display:flex;align-items:center;gap:8px}
+.iconbtn,.profilebtn{height:44px;border-radius:13px;background:#fff;border:1px solid var(--line);padding:0 13px;display:flex;align-items:center;gap:7px;font-weight:700}
+.iconbtn:hover,.profilebtn:hover{border-color:#f2bd90;background:#fffaf5}.cartcount{background:var(--orange);color:#fff;border-radius:99px;min-width:21px;height:21px;display:grid;place-items:center;font-size:11px}
+.menu-toggle{display:none}.hero{background:linear-gradient(110deg,#fff7ed,#fff 55%,#fff0dd);padding:34px 0 42px}
+.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:38px;align-items:center}.eyebrow{color:var(--orange);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:12px}
+.hero h1{font-size:clamp(38px,5vw,70px);line-height:1.02;margin:12px 0 18px;letter-spacing:-2.5px}.hero h1 span{color:var(--orange)}
+.hero p{font-size:17px;color:var(--muted);line-height:1.65;max-width:650px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}.primary,.secondary{padding:13px 19px;border-radius:13px;font-weight:800}.primary{background:var(--orange);color:#fff}.primary:hover{background:#d94f00}.secondary{background:#fff;border:1px solid var(--line)}
+.hero-points{display:flex;gap:18px;flex-wrap:wrap;color:#50545a;font-size:13px}.hero-points span{display:flex;gap:6px;align-items:center}
+.hero-image{height:430px;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);position:relative}.hero-image img{width:100%;height:100%;object-fit:cover}.hero-badge{position:absolute;left:18px;bottom:18px;background:#fff;padding:13px 16px;border-radius:15px;box-shadow:var(--shadow);font-size:13px}.hero-badge b{display:block;font-size:16px}
+.section{padding:38px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:20px}.section-head h2{margin:0;font-size:27px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.chips{display:flex;gap:10px;overflow:auto;padding:2px 0 8px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:99px;padding:10px 15px;font-weight:750;font-size:13px}.chip.active,.chip:hover{background:#fff2e7;border-color:#ffc48d;color:#c84e00}
+.story-row{display:grid;grid-template-columns:repeat(7,1fr);gap:15px}.story{text-align:center}.story-img{aspect-ratio:1;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--orange),#ffb703)}.story-img img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:3px solid #fff}.story span{display:block;font-size:12px;font-weight:750;margin-top:8px}
+.filterbar{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.filterbar button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 12px;font-weight:700;font-size:12px}.filterbar button.active{background:#201b18;color:#fff;border-color:#201b18}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;transition:.2s;box-shadow:0 3px 10px rgba(0,0,0,.025)}.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.card-img{height:210px;position:relative;background:#f5f5f5}.card-img img{width:100%;height:100%;object-fit:cover}.heart{position:absolute;right:10px;top:10px;width:37px;height:37px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:18px;box-shadow:0 4px 12px #0001}.heart.active{color:#e63946}.tag{position:absolute;left:10px;bottom:10px;background:#fff;border-radius:8px;padding:6px 8px;font-size:10px;font-weight:900}.card-body{padding:14px}.rating{display:inline-flex;gap:4px;align-items:center;background:#198754;color:#fff;border-radius:7px;padding:4px 7px;font-size:11px;font-weight:800}.card h3{font-size:16px;margin:9px 0 5px}.meta{font-size:12px;color:var(--muted);min-height:34px}.price-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}.price{font-weight:900}.add{border:1px solid #ffb678;background:#fff7ef;color:#d95700;border-radius:9px;padding:8px 13px;font-weight:900}
+.offer{border-radius:22px;padding:25px 28px;background:linear-gradient(110deg,#fff0df,#fff8ee);display:flex;align-items:center;justify-content:space-between;gap:20px}.offer h3{margin:0 0 5px;font-size:22px}.offer p{margin:0;color:var(--muted);font-size:13px}.coupon{font-weight:900;color:var(--orange);background:#fff;border:1px dashed #f3a563;border-radius:10px;padding:10px 14px;white-space:nowrap}
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature{padding:19px;border:1px solid var(--line);border-radius:16px}.feature-icon{font-size:25px}.feature h4{margin:10px 0 5px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.review{border:1px solid var(--line);border-radius:16px;padding:19px}.stars{color:#f59e0b}.review p{line-height:1.6;color:#555;font-size:13px}.review-user{font-weight:800;font-size:13px}
+.track-box{display:grid;grid-template-columns:1.1fr .9fr;border:1px solid var(--line);border-radius:22px;overflow:hidden}.map{min-height:410px;position:relative;background:linear-gradient(135deg,#e9f3e7,#f5f1e8);overflow:hidden}.roads{position:absolute;inset:-30%;background:repeating-linear-gradient(25deg,transparent 0 55px,#fff 56px 63px,transparent 64px 125px),repeating-linear-gradient(-25deg,transparent 0 80px,#fff 81px 87px,transparent 88px 145px);opacity:.7;transform:rotate(3deg)}.pin{position:absolute;width:46px;height:46px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;color:#fff;font-size:18px;box-shadow:0 8px 18px #0002}.pin span{transform:rotate(45deg)}.pin.store{background:var(--orange);left:16%;top:22%}.pin.home{background:#222;right:18%;bottom:20%}.pin.rider{background:#18864b;left:54%;top:52%;animation:pulse 1.7s infinite}@keyframes pulse{50%{box-shadow:0 0 0 14px #18864b20}}.route{position:absolute;left:20%;top:32%;width:55%;height:30%;border-top:4px dashed #18864b;transform:rotate(18deg);border-radius:50%}
+.track-side{padding:25px}.track-side h3{margin:0}.eta{font-size:33px;font-weight:950;margin:12px 0}.status{color:var(--green);font-weight:850}.timeline{margin-top:25px;border-left:2px solid #eee;padding-left:18px}.step{position:relative;margin:0 0 23px}.step:before{content:"";position:absolute;left:-26px;top:1px;width:12px;height:12px;border-radius:50%;background:#ddd;border:3px solid #fff;box-shadow:0 0 0 1px #ddd}.step.done:before{background:var(--green)}.step b{font-size:13px}.step small{display:block;color:var(--muted);margin-top:3px}
+.footer{background:#201b18;color:#fff;margin-top:40px}.footer-grid{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:30px;padding:42px 0}.footer p,.footer li{color:#bdb8b3;font-size:12px;line-height:1.7}.footer ul{list-style:none;padding:0}.footer h4{margin:0 0 10px}.copyright{border-top:1px solid #3a3531;padding:16px 0;color:#aaa;font-size:11px}
+.overlay{position:fixed;inset:0;background:#0008;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}.overlay.show{display:flex}.modal{background:#fff;width:min(560px,100%);max-height:90vh;overflow:auto;border-radius:22px;padding:24px;box-shadow:0 30px 80px #0004}.modal.large{width:min(900px,100%)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.modal-head h3{margin:0;font-size:22px}.close{width:38px;height:38px;border-radius:50%;background:#f6f6f6;font-size:19px}.field{margin-top:14px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;outline:none}.field textarea{min-height:85px;resize:vertical}.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.pay{border:1px solid var(--line);padding:14px;border-radius:13px;background:#fff;text-align:left}.pay.active{border-color:var(--orange);background:#fff6ed}.summary{background:#fafafa;border-radius:14px;padding:14px;margin-top:15px}.summary-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px}.summary-row.total{border-top:1px solid var(--line);margin-top:7px;padding-top:12px;font-weight:950;font-size:16px}
+.cart-drawer{position:fixed;right:0;top:0;bottom:0;width:min(440px,100%);background:#fff;z-index:110;transform:translateX(100%);transition:.25s;box-shadow:-15px 0 45px #0002;display:flex;flex-direction:column}.cart-drawer.show{transform:translateX(0)}.drawer-head{padding:18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}.cart-items{flex:1;overflow:auto;padding:15px}.cart-item{display:grid;grid-template-columns:65px 1fr auto;gap:10px;padding:13px 0;border-bottom:1px solid #f1eeeb}.cart-item img{width:65px;height:65px;object-fit:cover;border-radius:10px}.qty{display:flex;align-items:center;gap:7px;margin-top:8px}.qty button{width:26px;height:26px;border-radius:7px;background:#f5f5f5}.drawer-bottom{padding:16px;border-top:1px solid var(--line)}
+.success{text-align:center;padding:15px}.success-icon{width:65px;height:65px;border-radius:50%;background:#e8f7ee;color:var(--green);display:grid;place-items:center;font-size:30px;margin:0 auto 12px}.order-id{font-size:20px;font-weight:950}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#201b18;color:#fff;padding:12px 17px;border-radius:12px;z-index:200;opacity:0;pointer-events:none;transition:.2s;font-size:13px}.toast.show{opacity:1;transform:translate(-50%,0)}
+.view{display:none}.view.active{display:block}.page-title{padding:30px 0 10px}.page-title h1{margin:0;font-size:34px}.page-title p{color:var(--muted)}
+.orders-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.order-card{border:1px solid var(--line);border-radius:17px;padding:18px}.order-top{display:flex;justify-content:space-between;gap:10px}.order-status{color:var(--green);font-weight:850;font-size:12px}.order-products{display:flex;gap:8px;margin:14px 0}.order-products img{width:58px;height:58px;border-radius:9px;object-fit:cover}.order-actions{display:flex;gap:8px}.outline{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:9px;font-weight:750}
+.profile-grid{display:grid;grid-template-columns:270px 1fr;gap:22px}.profile-menu,.profile-content{border:1px solid var(--line);border-radius:18px;background:#fff}.profile-menu button{display:block;width:100%;text-align:left;background:#fff;padding:14px 16px;border-bottom:1px solid #f2efec;font-weight:750}.profile-menu button.active{background:#fff5eb;color:#d95700}.profile-content{padding:23px}.address-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.address{border:1px solid var(--line);border-radius:14px;padding:15px}
+.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat{padding:18px;border:1px solid var(--line);border-radius:16px}.stat small{color:var(--muted)}.stat b{display:block;font-size:27px;margin-top:8px}.admin-table{margin-top:18px;border:1px solid var(--line);border-radius:16px;overflow:auto}.admin-table table{width:100%;border-collapse:collapse;min-width:700px}.admin-table th,.admin-table td{text-align:left;padding:13px;border-bottom:1px solid #eee;font-size:12px}.admin-table th{background:#fafafa}
+.bottom-nav{display:none}
+
+/* Instagram-style Sweet Crumbs stories */
+.story{cursor:pointer}
+.story-img{position:relative}
+.story-img:after{content:"";position:absolute;inset:3px;border:2px solid #fff;border-radius:50%;pointer-events:none}
+.story-seen .story-img{background:#c9c9c9}
+.story-overlay{position:fixed;inset:0;background:rgba(15,12,10,.92);z-index:160;display:none;align-items:center;justify-content:center;padding:18px}
+.story-overlay.show{display:flex}
+.story-viewer{width:min(430px,94vw);height:min(760px,88vh);position:relative;border-radius:22px;overflow:hidden;background:#181310;box-shadow:0 30px 100px #0008}
+.story-viewer img{width:100%;height:100%;object-fit:cover}
+.story-shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.65),transparent 25%,transparent 55%,rgba(0,0,0,.72))}
+.story-bars{position:absolute;top:10px;left:10px;right:10px;display:flex;gap:4px;z-index:3}
+.story-bar{height:3px;flex:1;background:rgba(255,255,255,.4);border-radius:99px;overflow:hidden}
+.story-bar span{display:block;height:100%;width:0;background:#fff}
+.story-bar.done span{width:100%}
+.story-bar.current span{animation:storyProgress 4.5s linear forwards}
+@keyframes storyProgress{from{width:0}to{width:100%}}
+.story-top{position:absolute;top:24px;left:14px;right:12px;z-index:4;color:#fff;display:flex;align-items:center;gap:9px}
+.story-avatar{width:36px;height:36px;border-radius:50%;border:2px solid #fff;object-fit:cover}
+.story-brand{font-size:13px;font-weight:900}.story-time{font-size:10px;opacity:.8;font-weight:500}
+.story-close{margin-left:auto;width:38px;height:38px;border-radius:50%;background:#0005;color:#fff;font-size:22px}
+.story-copy{position:absolute;left:20px;right:20px;bottom:28px;z-index:10;color:#fff;pointer-events:auto}
+.story-copy .story-label{display:inline-block;background:#ff7a00;color:#fff;border-radius:99px;padding:6px 10px;font-size:10px;font-weight:900;text-transform:uppercase}
+.story-copy h2{font-size:30px;line-height:1.05;margin:9px 0 7px}.story-copy p{font-size:13px;line-height:1.5;margin:0 0 14px;color:#f5f5f5}
+.story-cta{position:relative;z-index:11;background:#fff;color:#201b18;border-radius:12px;padding:11px 15px;font-weight:900;cursor:pointer;pointer-events:auto}
+.story-tap{position:absolute;top:0;bottom:0;width:35%;z-index:5;background:transparent}.story-prev{left:0}.story-next{right:0}
+@media(max-width:480px){.story-overlay{padding:0}.story-viewer{width:100%;height:100%;border-radius:0}.story-copy h2{font-size:28px}}
+
+
+/* Desktop-only story presentation: keep mobile story unchanged */
+@media (min-width:801px){
+  .story-overlay{
+    padding:32px;
+    background:rgba(8,7,6,.94);
+  }
+  .story-viewer{
+    width:min(520px,46vw);
+    height:min(820px,88vh);
+    max-height:820px;
+    border-radius:26px;
+    box-shadow:0 28px 90px rgba(0,0,0,.55);
+  }
+  .story-viewer img{
+    object-position:center center;
+  }
+  .story-top{
+    top:18px;
+    left:18px;
+    right:16px;
+  }
+  .story-bars{
+    top:9px;
+    left:14px;
+    right:14px;
+  }
+  .story-copy{
+    left:25px;
+    right:25px;
+    bottom:26px;
+  }
+  .story-copy h2{
+    font-size:34px;
+    letter-spacing:-.8px;
+  }
+  .story-copy p{
+    max-width:430px;
+    font-size:14px;
+  }
+  .story-cta{
+    padding:12px 18px;
+    font-size:13px;
+  }
+}
+
+@media(max-width:1100px){
+ .navrow{grid-template-columns:auto 1fr auto;gap:14px}.search{max-width:none}.products{grid-template-columns:repeat(3,1fr)}.story-row{grid-template-columns:repeat(7,minmax(80px,1fr));overflow:auto}.feature-grid{grid-template-columns:repeat(2,1fr)}.admin-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:800px){
+ .container{width:min(100% - 28px,var(--max))}.topbar{display:none}.navrow{height:66px;grid-template-columns:auto 1fr auto}.logo{font-size:18px}.logo-mark{width:36px;height:36px}.search{height:42px}.navactions .profilebtn{display:none}.navactions .iconbtn:not(.cartbtn){display:none}.menu-toggle{display:flex;width:42px;height:42px;border:1px solid var(--line);background:#fff;border-radius:12px;align-items:center;justify-content:center}.nav{position:sticky}.hero{padding:24px 0 30px}.hero-grid{grid-template-columns:1fr}.hero-image{height:300px;order:-1}.hero h1{font-size:43px;letter-spacing:-1.8px}.hero p{font-size:14px}.section{padding:28px 0}.products{grid-template-columns:repeat(2,1fr);gap:13px}.card-img{height:170px}.card-body{padding:11px}.card h3{font-size:14px}.story-row{grid-template-columns:repeat(7,82px)}.track-box{grid-template-columns:1fr}.map{min-height:300px}.review-grid{grid-template-columns:1fr}.offer{align-items:flex-start;flex-direction:column}.footer-grid{grid-template-columns:1fr 1fr}.orders-grid{grid-template-columns:1fr}.profile-grid{grid-template-columns:1fr}.profile-menu{display:flex;overflow:auto}.profile-menu button{white-space:nowrap;border-bottom:0}.address-grid{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr 1fr}.bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:60;justify-content:space-around;padding:8px 5px calc(8px + env(safe-area-inset-bottom))}.bottom-nav button{background:#fff;font-size:10px;color:#666;display:grid;gap:3px;place-items:center}.bottom-nav button.active{color:var(--orange);font-weight:900}.bottom-nav i{font-style:normal;font-size:19px}.footer{padding-bottom:70px}
+}
+@media(max-width:480px){
+ .container{width:calc(100% - 22px)}.navrow{grid-template-columns:auto 1fr auto}.logo span:last-child{display:none}.search{padding:0 9px}.hero-image{height:235px;border-radius:20px}.hero h1{font-size:36px}.hero-buttons .primary,.hero-buttons .secondary{flex:1}.products{grid-template-columns:repeat(2,1fr);gap:9px}.card{border-radius:13px}.card-img{height:135px}.heart{width:31px;height:31px;font-size:15px}.tag{font-size:8px;padding:4px}.meta{font-size:10px}.add{padding:7px 9px;font-size:11px}.price{font-size:13px}.feature-grid{grid-template-columns:1fr 1fr;gap:9px}.feature{padding:13px}.feature h4{font-size:12px}.feature p{font-size:10px}.footer-grid{grid-template-columns:1fr}.modal{padding:18px;border-radius:18px}.pay-grid{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr 1fr}.page-title h1{font-size:28px}.cart-drawer{width:100%}.bottom-nav{height:64px}
+}
+
+#languageSelect{min-width:92px;justify-content:center;padding:0 9px;background:#fff}
+@media(max-width:800px){#languageSelect{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="container"><span>🔥 <span data-i18n="weekendSpecial">Weekend Special: <b>10% OFF</b> on orders above ₹799</span></span><span><span data-i18n="trustLine">Freshly baked • Own delivery team • Live tracking</span></span></div></div>
+
+<header class="nav">
+ <div class="container navrow">
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <a class="logo" href="#" onclick="showView('home');return false"><span class="logo-mark">🧁</span><span>Sweet Crumbs</span></a>
+  <label class="search"><span>⌕</span><input id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Search cakes, pastries, breads..." oninput="searchProducts(this.value)"></label>
+  <div class="navactions">
+   <select id="languageSelect" class="iconbtn" onchange="setLanguage(this.value)" aria-label="Language">
+    <option value="en">English</option>
+    <option value="ta">தமிழ்</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+   </select>
+   <button class="iconbtn" onclick="showView('orders')">📦 <span data-i18n="orders">Orders</span></button>
+   <button class="profilebtn" onclick="showView('profile')">👤 Account</button>
+   <button class="iconbtn cartbtn" onclick="openCart()">🛒 <span class="cartcount" id="cartCount">0</span></button>
+  </div>
+ </div>
+</header>
+
+<div id="mobileMenu" class="hidden" style="background:#fff;border-bottom:1px solid var(--line);padding:12px">
+ <div class="container" style="display:grid;gap:8px">
+  <label style="font-size:12px;font-weight:800">🌐 <span data-i18n="language">Language</span>
+   <select id="mobileLanguageSelect" onchange="setLanguage(this.value)" style="margin-left:8px;padding:8px;border:1px solid var(--line);border-radius:9px">
+    <option value="en">English</option><option value="ta">தமிழ்</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option>
+   </select>
+  </label>
+  <button class="outline" onclick="showView('home');toggleMenu()">🏠 Home</button>
+  <button class="outline" onclick="showView('orders');toggleMenu()">📦 <span data-i18n="myOrders">My Orders</span></button>
+  <button class="outline" onclick="showView('profile');toggleMenu()">👤 Profile</button>
+  <button class="outline" onclick="open<span data-i18n="supportShort">Support</span>();toggleMenu()">💬 <span data-i18n="supportShort">Support</span></button>
+ </div>
+</div>
+
+<main>
+<section id="home" class="view active">
+ <section class="hero"><div class="container hero-grid">
+  <div>
+   <div class="eyebrow"><span data-i18n="neighbourhoodBakery">Your neighbourhood bakery</span></div>
+   <h1><span data-i18n="heroTitle">Made fresh.<br><span>Delivered with care.</span></span></h1>
+   <p><span data-i18n="heroText">Order celebration cakes, artisan breads, pastries and seasonal specials from Sweet Crumbs. Choose your delivery slot, add special handling instructions and track your own delivery partner live.</span></p>
+   <div class="hero-buttons"><button class="primary" onclick="scrollToProducts()"><span data-i18n="orderNow">Order now →</span></button><button class="secondary" onclick="showView('orders')"><span data-i18n="trackMyOrder">Track my order</span></button></div>
+   <div class="hero-points"><span><span data-i18n="freshlyBaked">✓ Freshly baked</span></span><span><span data-i18n="securePay">✓ Secure UPI/COD</span></span><span><span data-i18n="ownDelivery">✓ Own delivery team</span></span></div>
+  </div>
+  <div class="hero-image"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=85"><div class="hero-badge"><b><span data-i18n="customerRating">4.9 ★ customer rating</span></b><span data-i18n="happyCustomers">Thousands of happy celebrations</span></div></div>
+ </div></section>
+
+ <section class="section"><div class="container">
+  <div class="section-head"><div><h2><span data-i18n="explore">Explore Sweet Crumbs</span></h2><p><span data-i18n="exploreSub">Quickly jump into what you're craving</span></p></div></div>
+  <div class="story-row">
+   <div class="story" onclick="openStory(0)"><div class="story-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="cakes">🎂 Cakes</span></span></div>
+   <div class="story" onclick="openStory(1)"><div class="story-img"><img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="pastries">🥐 Pastries</span></span></div>
+   <div class="story" onclick="openStory(2)"><div class="story-img"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="breads">🍞 Breads</span></span></div>
+   <div class="story" onclick="openStory(3)"><div class="story-img"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="festive">🎁 Festive</span></span></div>
+   <div class="story" onclick="openStory(4)"><div class="story-img"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="eggless">🌱 Eggless</span></span></div>
+   <div class="story" onclick="openStory(5)"><div class="story-img"><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="premium">✨ Premium</span></span></div>
+   <div class="story" onclick="openStory(6)"><div class="story-img"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=300&q=80"></div><span><span data-i18n="under500">₹500 & below</span></span></div>
+  </div>
+ </div></section>
+
+ <section class="section" id="productsSection" style="padding-top:5px"><div class="container">
+  <div class="section-head"><div><h2><span data-i18n="bestSellers">Best sellers near you</span></h2><p id="resultText"><span data-i18n="freshPicks">Fresh picks, rated by our customers</span></p></div><button class="secondary" onclick="showView('home');toast('Location: Chennai • Own delivery available')">📍 Chennai</button></div>
+  <div class="filterbar" id="filters">
+   <button class="active" onclick="filterProducts('all',this)">All</button><button onclick="filterProducts('cakes',this)"><span data-i18n="cakesPlain">Cakes</span></button><button onclick="filterProducts('pastries',this)"><span data-i18n="pastriesPlain">Pastries</span></button><button onclick="filterProducts('breads',this)"><span data-i18n="breadsPlain">Breads</span></button><button onclick="filterProducts('seasonal',this)"><span data-i18n="seasonal">Seasonal</span></button><button onclick="filterProducts('eggless',this)"><span data-i18n="egglessPlain">Eggless</span></button><button onclick="filterProducts('premium',this)"><span data-i18n="premiumPlain">Premium</span></button><button onclick="filterProducts('under500',this)"><span data-i18n="under500Plain">Under ₹500</span></button><button onclick="filterProducts('rating',this)"><span data-i18n="rating45">4.5+ ★</span></button>
+  </div>
+  <div class="products" id="products"></div>
+ </div></section>
+
+ <section class="section"><div class="container"><div class="offer"><div><h3><span data-i18n="sweetDeal">Sweet deal for your next order 🎉</span></h3><p><span data-i18n="couponText">Get 10% off on eligible orders. One click to apply at checkout.</span></p></div><button class="coupon" onclick="applyCoupon()"><span data-i18n="applyCoupon">SWEET10 · Apply</span></button></div></div></section>
+ <section class="section"><div class="container"><div class="feature-grid">
+  <div class="feature"><div class="feature-icon">🔥</div><h4><span data-i18n="freshlyBakedTitle">Freshly baked</span></h4><p><span data-i18n="freshlyBakedText">Prepared in small batches for better freshness and taste.</span></p></div>
+  <div class="feature"><div class="feature-icon">🛡️</div><h4><span data-i18n="qualityCheckedTitle">Quality checked</span></h4><p><span data-i18n="qualityCheckedText">Every order is checked before it leaves our bakery.</span></p></div>
+  <div class="feature"><div class="feature-icon">🛵</div><h4><span data-i18n="ownDeliveryTitle">Own delivery team</span></h4><p><span data-i18n="ownDeliveryText">No third-party riders. Your cake is handled by our team.</span></p></div>
+  <div class="feature"><div class="feature-icon">📍</div><h4><span data-i18n="liveTrackingTitle">Live tracking</span></h4><p><span data-i18n="liveTrackingText">Know who accepted your order and where it is.</span></p></div>
+ </div></div></section>
+ <section class="section"><div class="container">
+  <div class="section-head"><div><h2><span data-i18n="reviewsTitle">What customers say</span></h2><p><span data-i18n="reviewsSub">Real-feeling review experience for the prototype</span></p></div></div>
+  <div class="review-grid"><div class="review"><div class="stars">★★★★★</div><p>“The cake arrived exactly in the selected slot and the rider handled it very carefully.”</p><div class="review-user">Priya • Chennai</div></div><div class="review"><div class="stars">★★★★★</div><p>“Loved the live tracking. I knew when the delivery partner picked up my order.”</p><div class="review-user">Arun • Salem</div></div><div class="review"><div class="stars">★★★★☆</div><p>“The eggless chocolate cake was soft and fresh. Will definitely reorder.”</p><div class="review-user">Meena • Coimbatore</div></div></div>
+ </div></section>
+</section>
+
+<section id="orders" class="view"><div class="container">
+ <div class="page-title"><h1><span data-i18n="yourOrders">Your Orders</span></h1><p><span data-i18n="ordersSub">Track active deliveries, reorder favourites and view past orders.</span></p></div>
+ <div class="orders-grid" id="ordersGrid"></div>
+</div></section>
+
+<section id="track" class="view"><div class="container">
+ <div class="page-title"><h1><span data-i18n="trackOrder">Track Order</span></h1><p><span data-i18n="trackSub">Real-time delivery view for your Sweet Crumbs order.</span></p></div>
+ <div class="track-box"><div class="map"><div class="roads"></div><div class="route"></div><div class="pin store"><span>🧁</span></div><div class="pin rider"><span>🛵</span></div><div class="pin home"><span>⌂</span></div></div>
+ <div class="track-side"><div class="status">● ON THE WAY</div><div class="eta" id="eta">18 min</div><div style="color:var(--muted);font-size:13px">Estimated arrival at your selected address</div><div class="summary"><b>Order <span id="trackOrderId">SC-1024</span></b><div style="margin-top:8px;font-size:12px;color:#666">Delivery partner: <b>Ravi K.</b><br>Vehicle: TN 38 AB 4521</div></div><div class="timeline"><div class="step done"><b>Order accepted</b><small>Sweet Crumbs bakery confirmed your order</small></div><div class="step done"><b>Preparing & quality checked</b><small>Your cake is packed safely</small></div><div class="step done"><b>Picked up by Ravi</b><small>Delivery partner is on the way</small></div><div class="step"><b>Arriving at your location</b><small>We'll notify you when nearby</small></div><div class="step"><b>Delivered</b><small>Enjoy your order ❤️</small></div></div></div></div>
+</div></section>
+
+<section id="profile" class="view"><div class="container">
+ <div class="page-title"><h1><span data-i18n="account">Account</span></h1><p><span data-i18n="profileSub">Manage your Sweet Crumbs profile, addresses and preferences.</span></p></div>
+ <div class="profile-grid"><div class="profile-menu"><button class="active">👤 Profile</button><button onclick="toast('Address manager opened')">📍 Addresses</button><button onclick="toast('Payment methods opened')">💳 Payment methods</button><button onclick="toast('Preferences saved')">⚙️ Preferences</button><button onclick="open<span data-i18n="supportShort">Support</span>()">💬 Help & <span data-i18n="supportShort">Support</span></button></div>
+ <div class="profile-content"><h3 style="margin-top:0">Welcome back, Giri 👋</h3><div class="field"><label>Full name</label><input value="Giri" id="profileName"></div><div class="field"><label>Mobile number</label><input value="+91 9XXXXXXXXX"></div><h3 style="margin:25px 0 10px">Saved addresses</h3><div class="address-grid"><div class="address"><b>🏠 Home</b><p style="font-size:12px;color:#666">Chennai, Tamil Nadu<br>Door No. 12, Main Road</p><button class="outline">Edit</button></div><div class="address"><b>💼 Work</b><p style="font-size:12px;color:#666">Office address<br>Saved delivery location</p><button class="outline">Edit</button></div></div></div></div>
+</div></section>
+
+<section id="admin" class="view"><div class="container">
+ <div class="page-title"><h1><span data-i18n="adminDashboard">Admin Dashboard</span></h1><p><span data-i18n="adminSub">Prototype admin portal for bakery operations.</span></p></div>
+ <div class="admin-grid"><div class="stat"><small>Today's orders</small><b>48</b></div><div class="stat"><small>Revenue</small><b>₹42.8K</b></div><div class="stat"><small>Active deliveries</small><b>11</b></div><div class="stat"><small>Customer rating</small><b>4.9 ★</b></div></div>
+ <div class="admin-table"><table><thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Status</th><th>Delivery partner</th><th>Action</th></tr></thead><tbody><tr><td>SC-1024</td><td>Priya</td><td>Chocolate Cake</td><td style="color:#18864b">Out for delivery</td><td>Ravi K.</td><td><button class="outline" onclick="toast('Order assignment updated')">Manage</button></td></tr><tr><td>SC-1023</td><td>Arun</td><td>Pastry Box</td><td>Preparing</td><td>—</td><td><button class="outline" onclick="toast('Delivery partner assigned')">Assign</button></td></tr></tbody></table></div>
+</div></section>
+
+<section id="delivery" class="view"><div class="container">
+ <div class="page-title"><h1><span data-i18n="deliveryPartner"><span data-i18n="deliveryPartner">Delivery Partner</span></span></h1><p><span data-i18n="deliverySub">Operational screen for your own delivery team.</span></p></div>
+ <div class="admin-grid"><div class="stat"><small>Partner</small><b>Ravi K.</b></div><div class="stat"><small>Today's deliveries</small><b>12</b></div><div class="stat"><small>Completed</small><b>9</b></div><div class="stat"><small>Rating</small><b>4.9 ★</b></div></div>
+ <div class="order-card" style="margin-top:18px"><div class="order-top"><div><b>Active delivery • SC-1024</b><div style="font-size:12px;color:#666;margin-top:5px">Chocolate Celebration Cake • ₹989</div></div><span class="order-status">ON THE WAY</span></div><p style="font-size:13px">📍 Deliver to: Chennai, Tamil Nadu<br>📝 Handling: Keep upright. Do not expose to heat.</p><div class="order-actions"><button class="primary" onclick="toast('Location shared with customer')">Share live location</button><button class="outline" onclick="toast('Delivery marked completed')">Mark delivered</button></div></div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="container footer-grid"><div><div class="logo"><span class="logo-mark">🧁</span><span>Sweet Crumbs</span></div><p>Your trusted local bakery with direct ordering and our own delivery team.</p></div><div><h4><span data-i18n="discover">Discover</span></h4><ul><li onclick="scrollToProducts()">Cakes</li><li onclick="scrollToProducts()">Pastries</li><li onclick="scrollToProducts()">Seasonal</li></ul></div><div><h4><span data-i18n="customer">Customer</span></h4><ul><li onclick="showView('orders')"><span data-i18n="myOrders">My Orders</span></li><li onclick="showView('profile')">Account</li><li onclick="open<span data-i18n="supportShort">Support</span>()"><span data-i18n="supportShort">Support</span></li></ul></div><div><h4><span data-i18n="business">Business</span></h4><ul><li onclick="showView('admin')"><span data-i18n="adminPortal">Admin Portal</span></li><li onclick="showView('delivery')"><span data-i18n="deliveryPartner">Delivery Partner</span></li><li onclick="toast('Careers page demo')">Careers</li></ul></div></div><div class="container copyright">© 2026 Sweet Crumbs • Prototype UI • Secure checkout • Own delivery network</div></footer>
+
+<nav class="bottom-nav"><button class="active" onclick="showView('home',this)"><i>⌂</i>Home</button><button onclick="scrollToProducts()"><i>⌕</i>Search</button><button onclick="openCart()"><i>🛒</i>Cart</button><button onclick="showView('orders',this)"><i>📦</i>Orders</button><button onclick="showView('profile',this)"><i>👤</i><span data-i18n="account">Account</span></button></nav>
+
+
+<div class="story-overlay" id="storyOverlay" aria-label="Sweet Crumbs today's specials">
+  <div class="story-viewer" id="storyViewer">
+    <img id="storyImage" alt="Today's Sweet Crumbs special">
+    <div class="story-shade"></div>
+    <div class="story-bars" id="storyBars"></div>
+    <div class="story-top">
+      <img class="story-avatar" id="storyAvatar" alt="Sweet Crumbs">
+      <div><div class="story-brand">Sweet Crumbs</div><div class="story-time">Today's special • Fresh from our bakery</div></div>
+      <button class="story-close" type="button" onclick="closeStory()" aria-label="Close story">×</button>
+    </div>
+    <button class="story-tap story-prev" type="button" onclick="storyPrev()" aria-label="Previous story"></button>
+    <button class="story-tap story-next" type="button" onclick="storyNext()" aria-label="Next story"></button>
+    <div class="story-copy">
+      <span class="story-label" id="storyLabel">Today's special</span>
+      <h2 id="storyTitle"></h2>
+      <p id="storyText"></p>
+      <button class="story-cta" type="button" onclick="storyOrder()">Order this special →</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="productOverlay"><div class="modal large" id="productModal"></div></div>
+<div class="overlay" id="checkoutOverlay"><div class="modal"><div class="modal-head"><h3><span data-i18n="checkout">Checkout</span></h3><button class="close" onclick="closeOverlay('checkoutOverlay')">×</button></div>
+ <div class="field"><label><span data-i18n="deliveryAddress">Delivery address</span></label><textarea id="address">Door No. 12, Main Road, Chennai, Tamil Nadu</textarea></div>
+ <div class="field"><label><span data-i18n="deliverySlot">Delivery slot</span></label><select id="slot"><option>Today • 6:00 PM – 7:00 PM</option><option>Today • 7:00 PM – 8:00 PM</option><option>Tomorrow • 10:00 AM – 11:00 AM</option></select></div>
+ <div class="field"><label><span data-i18n="handlingInstructions">Special cake handling instructions</span></label><textarea id="notes" placeholder="Example: Keep upright, call before delivery..."></textarea></div>
+ <div class="field"><label><span data-i18n="paymentMethod">Payment method</span></label><div class="pay-grid"><button class="pay active" id="upiPay" onclick="selectPay('UPI')"><b>📱 UPI</b><br><small>Instant payment</small></button><button class="pay" id="codPay" onclick="selectPay('COD')"><b>💵 <span data-i18n="cod">Cash on Delivery</span></b><br><small>Pay when delivered</small></button></div></div>
+ <div id="upiField" class="field"><label>UPI ID</label><input id="upiId" placeholder="name@upi"></div>
+ <div class="summary" id="checkoutSummary"></div><button class="primary" style="width:100%;margin-top:14px" onclick="placeOrder()"><span data-i18n="placeOrder">Place order securely →</span></button>
+</div></div>
+
+<div class="overlay" id="successOverlay"><div class="modal"><div class="success"><div class="success-icon">✓</div><h2><span data-i18n="orderConfirmed">Order confirmed!</span></h2><p style="color:#666"><span data-i18n="orderAccepted">Your Sweet Crumbs order has been accepted by the bakery.</span></p><div class="summary"><div class="order-id" id="successId">SC-0000</div><div id="successDetails" style="font-size:12px;color:#666;margin-top:7px"></div></div><button class="primary" style="width:100%;margin-top:14px" onclick="closeOverlay('successOverlay');showView('track')">📍 <span data-i18n="trackMyOrder">Track my order</span></button><button class="outline" style="width:100%;margin-top:8px" onclick="closeOverlay('successOverlay');showView('orders')"><span data-i18n="viewOrders">View all orders</span></button></div></div></div>
+
+<div class="overlay" id="supportOverlay"><div class="modal"><div class="modal-head"><h3><span data-i18n="support">Sweet Crumbs <span data-i18n="supportShort">Support</span></span></h3><button class="close" onclick="closeOverlay('supportOverlay')">×</button></div><div class="feature" style="margin-top:15px"><b>📍 Where is my order?</b><p>Open live tracking to see bakery, rider and destination.</p><button class="outline" onclick="closeOverlay('supportOverlay');showView('track')">Track now</button></div><div class="feature" style="margin-top:10px"><b>💬 Chat with support</b><p>Our customer support team can help with order issues.</p><button class="outline" onclick="toast('<span data-i18n="supportShort">Support</span> chat connected')">Start chat</button></div><div class="feature" style="margin-top:10px"><b>⚠️ Report an issue</b><p>Tell us about a damaged, delayed or incorrect order.</p><button class="outline" onclick="toast('Issue form opened')">Report issue</button></div></div></div>
+
+<div class="cart-drawer" id="cartDrawer"><div class="drawer-head"><b><span data-i18n="yourCart">Your cart</span></b><button class="close" onclick="closeCart()">×</button></div><div class="cart-items" id="cartItems"></div><div class="drawer-bottom" id="cartBottom"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const products=[
+{id:1,name:"Chocolate Celebration Cake",price:899,rating:4.9,cat:"cakes",tags:["Bestseller","Eggless"],img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=85",desc:"Rich chocolate sponge layered with smooth chocolate cream. Perfect for birthdays and celebrations.",eggless:true,premium:true},
+{id:2,name:"Strawberry Fresh Cream",price:849,rating:4.8,cat:"cakes",tags:["Fresh","Popular"],img:"https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=700&q=85",desc:"Light vanilla sponge, fresh strawberries and whipped cream.",eggless:false},
+{id:3,name:"Red Velvet Dream",price:999,rating:4.9,cat:"cakes",tags:["Premium","Bestseller"],img:"https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=700&q=85",desc:"Velvety red sponge with creamy cheese frosting.",premium:true},
+{id:4,name:"Butterscotch Crunch Cake",price:749,rating:4.7,cat:"cakes",tags:["Value"],img:"https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=85",desc:"Classic butterscotch cake with caramel crunch."},
+{id:5,name:"Butter Croissant",price:120,rating:4.8,cat:"pastries",tags:["Fresh"],img:"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=85",desc:"Flaky, buttery French-style croissant baked fresh every morning."},
+{id:6,name:"Chocolate Danish",price:150,rating:4.7,cat:"pastries",tags:["Chocolate"],img:"https://images.unsplash.com/photo-1568942569965-1e79afdff6e3?auto=format&fit=crop&w=700&q=85",desc:"Golden Danish pastry with a rich chocolate centre."},
+{id:7,name:"Almond Croissant",price:190,rating:4.9,cat:"pastries",tags:["Premium"],img:"https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=700&q=85",desc:"Crisp almond topping with buttery laminated layers.",premium:true},
+{id:8,name:"Classic Sourdough",price:180,rating:4.8,cat:"breads",tags:["Artisan"],img:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=85",desc:"Slow-fermented artisan sourdough with a crisp crust."},
+{id:9,name:"French Baguette",price:140,rating:4.6,cat:"breads",tags:["Fresh"],img:"https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=700&q=85",desc:"Classic crusty baguette baked in small batches."},
+{id:10,name:"Festival Gift Box",price:699,rating:4.9,cat:"seasonal",tags:["Festival","Gift"],img:"https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=700&q=85",desc:"Curated festive treats packed beautifully for gifting.",premium:true},
+{id:11,name:"Mini Celebration Box",price:449,rating:4.7,cat:"seasonal",tags:["Under ₹500"],img:"https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=700&q=85",desc:"A compact celebration box for small moments."},
+{id:12,name:"Premium Chocolate Tart",price:399,rating:4.8,cat:"pastries",tags:["Premium"],img:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=700&q=85",desc:"Silky chocolate filling in a crisp pastry shell.",premium:true}
+];
+let cart=JSON.parse(localStorage.getItem("sc_cart")||"[]"), currentFilter="all", payment="UPI", coupon=false;
+let orders=JSON.parse(localStorage.getItem("sc_orders")||"[]");
+
+function save(){localStorage.setItem("sc_cart",JSON.stringify(cart));localStorage.setItem("sc_orders",JSON.stringify(orders))}
+function money(n){return "₹"+n.toLocaleString("en-IN")}
+function render(list=products){
+ const box=document.getElementById("products");box.innerHTML="";
+ list.forEach(p=>{const lp=localizedProduct(p);const item=cart.find(x=>x.id===p.id);box.innerHTML+=`<article class="card">
+ <div class="card-img"><img src="${p.img}" loading="lazy"><button class="heart ${localStorage.getItem("fav"+p.id)?"active":""}" onclick="toggleFav(${p.id},this)">♥</button><span class="tag">${p.tags[0]}</span></div>
+ <div class="card-body"><span class="rating">★ ${p.rating}</span><h3>${lp.name}</h3><div class="meta">${lp.desc}</div><div class="price-row"><span class="price">${money(p.price)}</span><button class="add" onclick="add(${p.id})">${item?"+"+item.qty+" in cart":"ADD +"}</button></div></div></article>`})
+ document.getElementById("resultText").textContent=list.length+" fresh options available";
+}
+function filterProducts(type,btn){
+ currentFilter=type;let list=products;
+ if(type==="under500")list=list.filter(p=>p.price<=500);
+ else if(type==="rating")list=list.filter(p=>p.rating>=4.5);
+ else if(type==="eggless")list=list.filter(p=>p.eggless);
+ else if(type==="premium")list=list.filter(p=>p.premium);
+ else if(type!=="all")list=list.filter(p=>p.cat===type);
+ document.querySelectorAll("#filters button").forEach(x=>x.classList.remove("active"));if(btn)btn.classList.add("active");
+ render(list);scrollToProducts();
+}
+function searchProducts(q){q=q.toLowerCase().trim();render(products.filter(p=>(p.name+" "+p.cat+" "+p.tags.join(" ")).toLowerCase().includes(q)));showView("home")}
+function scrollToProducts(){showView("home");setTimeout(()=>document.getElementById("productsSection").scrollIntoView({behavior:"smooth"}),20)}
+function toggleFav(id,el){let k="fav"+id;if(localStorage.getItem(k)){localStorage.removeItem(k);el.classList.remove("active")}else{localStorage.setItem(k,"1");el.classList.add("active");toast("Added to favourites ❤️")}}
+function add(id){const x=cart.find(i=>i.id===id);if(x)x.qty++;else cart.push({id,qty:1});save();updateCart();renderFiltered();toast("Added to cart")}
+function remove(id){const x=cart.find(i=>i.id===id);if(!x)return;if(x.qty>1)x.qty--;else cart=cart.filter(i=>i.id!==id);save();updateCart();renderFiltered()}
+function renderFiltered(){let list=products;if(currentFilter==="under500")list=list.filter(p=>p.price<=500);else if(currentFilter==="rating")list=list.filter(p=>p.rating>=4.5);else if(currentFilter==="eggless")list=list.filter(p=>p.eggless);else if(currentFilter==="premium")list=list.filter(p=>p.premium);else if(currentFilter!=="all")list=list.filter(p=>p.cat===currentFilter);render(list)}
+function totals(){let sub=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.qty,0);let delivery=sub>=999?0:49;let disc=coupon?Math.round(sub*.10):0;return{sub,delivery,disc,total:sub+delivery-disc}}
+function updateCart(){
+ document.getElementById("cartCount").textContent=cart.reduce((s,x)=>s+x.qty,0);
+ const box=document.getElementById("cartItems"),b=document.getElementById("cartBottom");box.innerHTML="";
+ if(!cart.length){box.innerHTML='<div style="text-align:center;padding:50px 10px;color:#777">🛒<h3>Your cart is empty</h3><p>Add something delicious from Sweet Crumbs.</p><button class="primary" onclick="closeCart();scrollToProducts()">Browse products</button></div>';b.innerHTML="";return}
+ cart.forEach(i=>{let p=products.find(x=>x.id===i.id);box.innerHTML+=`<div class="cart-item"><img src="${p.img}"><div><b style="font-size:13px">${p.name}</b><div style="font-size:12px;color:#777">${money(p.price)}</div><div class="qty"><button onclick="remove(${p.id})">−</button><b>${i.qty}</b><button onclick="add(${p.id})">+</button></div></div><b>${money(p.price*i.qty)}</b></div>`});
+ let t=totals();b.innerHTML=`<div class="summary-row"><span>Item total</span><b>${money(t.sub)}</b></div><div class="summary-row"><span>Delivery</span><b>${t.delivery?money(t.delivery):"FREE"}</b></div>${t.disc?`<div class="summary-row" style="color:#18864b"><span>Coupon</span><b>−${money(t.disc)}</b></div>`:""}<div class="summary-row total"><span>Total</span><b>${money(t.total)}</b></div><button class="primary" style="width:100%;margin-top:12px" onclick="openCheckout()"><span data-i18n="proceedCheckout">Proceed to checkout →</span></button>`;
+}
+function openCart(){document.getElementById("cartDrawer").classList.add("show");updateCart()}
+function closeCart(){document.getElementById("cartDrawer").classList.remove("show")}
+function applyCoupon(){coupon=true;save();updateCart();toast("SWEET10 applied — 10% discount")}
+function openCheckout(){if(!cart.length){toast("Your cart is empty");return}closeCart();document.getElementById("checkoutOverlay").classList.add("show");updateCheckout()}
+function updateCheckout(){let t=totals();document.getElementById("checkoutSummary").innerHTML=`<div class="summary-row"><span>Items</span><b>${money(t.sub)}</b></div><div class="summary-row"><span>Delivery</span><b>${t.delivery?money(t.delivery):"FREE"}</b></div><div class="summary-row"><span>Discount</span><b style="color:#18864b">−${money(t.disc)}</b></div><div class="summary-row total"><span>Payable</span><b>${money(t.total)}</b></div>`}
+function selectPay(type){payment=type;document.getElementById("upiPay").classList.toggle("active",type==="UPI");document.getElementById("codPay").classList.toggle("active",type==="COD");document.getElementById("upiField").classList.toggle("hidden",type!=="UPI")}
+function placeOrder(){if(payment==="UPI"&&!document.getElementById("upiId").value.trim()){toast("Enter your UPI ID");return}let t=totals(),id="SC-"+Math.floor(1000+Math.random()*9000);let order={id,date:new Date().toLocaleDateString("en-IN"),items:cart.map(i=>({...i})),total:t.total,payment,status:"Out for delivery"};orders.unshift(order);save();document.getElementById("successId").textContent=id;document.getElementById("successDetails").innerHTML=`${payment} • ${money(t.total)} • Delivery slot selected<br>Special handling instructions saved`;cart=[];coupon=false;save();updateCart();closeOverlay("checkoutOverlay");document.getElementById("successOverlay").classList.add("show");document.getElementById("trackOrderId").textContent=id;renderFiltered();renderOrders()}
+function renderOrders(){const box=document.getElementById("ordersGrid");if(!orders.length){box.innerHTML=`<div class="order-card"><h3>No orders yet</h3><p style="color:#777">Your completed orders will appear here.</p><button class="primary" onclick="scrollToProducts()">Start ordering</button></div>`;return}box.innerHTML=orders.map(o=>`<div class="order-card"><div class="order-top"><div><b>${o.id}</b><div style="font-size:11px;color:#777;margin-top:4px">${o.date} • ${o.payment}</div></div><span class="order-status">● ${o.status}</span></div><div class="order-products">${o.items.map(i=>{let p=products.find(x=>x.id===i.id);return `<img title="${p.name}" src="${p.img}">`}).join("")}</div><div style="font-weight:900">${money(o.total)}</div><div class="order-actions" style="margin-top:12px"><button class="primary" onclick="showView('track')">Track order</button><button class="outline" onclick="reorder('${o.id}')">Reorder</button><button class="outline" onclick="toast('Rating screen opened ⭐')">Rate</button></div></div>`).join("")}
+function reorder(id){let o=orders.find(x=>x.id===id);if(!o)return;o.items.forEach(i=>{let x=cart.find(c=>c.id===i.id);if(x)x.qty+=i.qty;else cart.push({...i})});save();updateCart();openCart();toast("Items added for reorder")}
+function openProduct(id){let p=products.find(x=>x.id===id);let lp=localizedProduct(p);document.getElementById("productModal").innerHTML=`<div class="modal-head"><h3>${lp.name}</h3><button class="close" onclick="closeOverlay('productOverlay')">×</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:16px"><img src="${p.img}" style="width:100%;height:300px;object-fit:cover;border-radius:16px"><div><span class="rating">★ ${p.rating}</span><h2>${money(p.price)}</h2><p style="color:#666;line-height:1.6">${lp.desc}</p><div class="summary"><b>Product highlights</b><p style="font-size:12px;color:#666">Freshly prepared • Quality checked • Safe packaging • Own delivery</p></div><button class="primary" style="width:100%;margin-top:12px" onclick="add(${p.id});closeOverlay('productOverlay');openCart()">Add to cart</button></div></div>`;document.getElementById("productOverlay").classList.add("show")}
+function closeOverlay(id){document.getElementById(id).classList.remove("show")}
+function openSupport(){document.getElementById("supportOverlay").classList.add("show")}
+function showView(id,btn){document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));document.getElementById(id).classList.add("active");if(id==="orders")renderOrders();window.scrollTo({top:0,behavior:"smooth"});if(btn){document.querySelectorAll(".bottom-nav button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}}
+function toggleMenu(){document.getElementById("mobileMenu").classList.toggle("hidden")}
+function toast(msg){let t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2200)}
+
+const stories=[
+ {cat:"Cakes",title:"Chocolate Celebration Cake",text:"Today's special: rich chocolate sponge, silky chocolate cream and a celebration finish.",img:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=90",label:"Today's special",product:1},
+ {cat:"Pastries",title:"Fresh Croissant Hour",text:"Buttery, flaky croissants are coming out fresh today. Perfect with your evening coffee.",img:"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=90",label:"Fresh from oven",product:5},
+ {cat:"Breads",title:"Artisan Bread of the Day",text:"Slow-fermented sourdough with a crisp crust — baked fresh in small batches today.",img:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=90",label:"Baked today",product:8},
+ {cat:"Festive",title:"Festival Gift Box",text:"A beautiful selection of Sweet Crumbs treats, packed fresh for today's gifting.",img:"https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=900&q=90",label:"Today's festive pick",product:10},
+ {cat:"Eggless",title:"Eggless Cupcake Special",text:"Soft, fluffy and eggless — today's easy favourite for every celebration.",img:"https://images.unsplash.com/photo-1587668178277-295251f900ce?auto=format&fit=crop&w=900&q=90",label:"Eggless favourite",product:1},
+ {cat:"Premium",title:"Premium Tart of the Day",text:"Silky chocolate filling in a crisp pastry shell. A premium treat for today.",img:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=90",label:"Premium pick",product:12},
+ {cat:"Under ₹500",title:"Mini Celebration Box",text:"A small box for a big moment — today's celebration pick under ₹500.",img:"https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=90",label:"Under ₹500",product:11}
+];
+let storyIndex=0, storyTimer=null;
+function openStory(index){
+  storyIndex=Math.max(0,Math.min(stories.length-1,index));
+  const overlay=document.getElementById("storyOverlay");
+  overlay.classList.add("show");
+  document.body.style.overflow="hidden";
+  markStorySeen(storyIndex);
+  renderStory();
+}
+function markStorySeen(index){
+  const storyEls=document.querySelectorAll(".story");
+  if(storyEls[index])storyEls[index].classList.add("story-seen");
+}
+
+function localizedStory(s){
+  if(currentLanguage==="ta"){
+    const a=[
+      ["இன்றைய சிறப்பு","சாக்லேட் கொண்டாட்ட கேக்","இன்றைய ஸ்பெஷல்: ரிச் சாக்லேட் ஸ்பாஞ்ச், மென்மையான சாக்லேட் கிரீம் மற்றும் கொண்டாட்ட அலங்காரம்."],
+      ["அடுப்பிலிருந்து புதியது","புதிய குரோசாங் நேரம்","வெண்ணெய் நிறைந்த, கிரிஸ்பியான குரோசாங் இன்று புதியதாக சுடப்படுகிறது. மாலை காபியுடன் சிறந்தது."],
+      ["இன்று சுடப்பட்டது","இன்றைய ஆர்டிசன் பிரெட்","மெதுவாக புளிக்கவைத்த சவர்டோ, கிரிஸ்பியான மேற்பரப்புடன் இன்று புதியதாக சுடப்பட்டது."],
+      ["இன்றைய விழாக்கால தேர்வு","விழாக்கால கிஃப்ட் பாக்ஸ்","இன்றைய பரிசளிப்புக்காக புதியதாக பேக் செய்யப்பட்ட Sweet Crumbs ட்ரீட்ஸ்."],
+      ["முட்டையில்லா விருப்பம்","எக்லெஸ் கப்கேக் ஸ்பெஷல்","மென்மையான, பஞ்சுபோன்ற, முட்டையில்லா இன்றைய பிடித்த தேர்வு."],
+      ["பிரீமியம் தேர்வு","இன்றைய பிரீமியம் டார்ட்","கிரிஸ்பியான பேஸ்ட்ரி ஷெல்லில் சில்கி சாக்லேட் ஃபில்லிங்."],
+      ["₹500-க்கு கீழ்","மினி கொண்டாட்ட பாக்ஸ்","சிறிய பாக்ஸ், பெரிய மகிழ்ச்சி — ₹500-க்கு கீழ் இன்றைய கொண்டாட்ட தேர்வு."]
+    ][storyIndex];
+    return {label:a[0],title:a[1],text:a[2]};
+  }
+  if(currentLanguage==="hi"){
+    const a=[
+      ["आज की खासियत","चॉकलेट सेलिब्रेशन केक","आज का स्पेशल: रिच चॉकलेट स्पॉन्ज, स्मूद चॉकलेट क्रीम और सेलिब्रेशन फिनिश।"],
+      ["ओवन से ताज़ा","फ्रेश क्रोइसां टाइम","बटर वाले फ्लेकी क्रोइसां आज ताज़ा तैयार हैं। शाम की कॉफी के साथ परफेक्ट।"],
+      ["आज बेक किया गया","आज की आर्टिसन ब्रेड","स्लो-फर्मेंटेड सॉरडो, क्रिस्पी क्रस्ट के साथ आज ताज़ा बेक किया गया।"],
+      ["आज का फेस्टिव पिक","फेस्टिवल गिफ्ट बॉक्स","आज की गिफ्टिंग के लिए ताज़ा और खूबसूरती से पैक किए गए Sweet Crumbs ट्रीट्स।"],
+      ["एगलेस पसंद","एगलेस कपकेक स्पेशल","सॉफ्ट, फ्लफी और एगलेस — आज का हर सेलिब्रेशन पसंदीदा।"],
+      ["प्रीमियम पिक","आज का प्रीमियम टार्ट","क्रिस्पी पेस्ट्री शेल में सिल्की चॉकलेट फिलिंग।"],
+      ["₹500 से कम","मिनी सेलिब्रेशन बॉक्स","छोटा बॉक्स, बड़ी खुशी — ₹500 से कम में आज का सेलिब्रेशन पिक।"]
+    ][storyIndex];
+    return {label:a[0],title:a[1],text:a[2]};
+  }
+  if(currentLanguage==="te"){
+    const a=[
+      ["ఈరోజు స్పెషల్","చాక్లెట్ సెలబ్రేషన్ కేక్","ఈరోజు స్పెషల్: రిచ్ చాక్లెట్ స్పాంజ్, స్మూత్ చాక్లెట్ క్రీమ్ మరియు సెలబ్రేషన్ ఫినిష్."],
+      ["ఓవెన్ నుంచి తాజాగా","ఫ్రెష్ క్రొయిసాంట్ అవర్","బట్టరీ, ఫ్లేకీ క్రొయిసాంట్స్ ఈరోజు తాజాగా సిద్ధంగా ఉన్నాయి. సాయంత్రం కాఫీతో బెస్ట్."],
+      ["ఈరోజు బేక్ చేసినది","ఈరోజు ఆర్టిసన్ బ్రెడ్","క్రిస్పీ క్రస్ట్‌తో స్లో-ఫెర్మెంటెడ్ సవర్డో — ఈరోజు తాజాగా బేక్ చేశాం."],
+      ["ఈరోజు ఫెస్టివ్ పిక్","ఫెస్టివల్ గిఫ్ట్ బాక్స్","ఈరోజు గిఫ్టింగ్ కోసం తాజాగా మరియు అందంగా ప్యాక్ చేసిన Sweet Crumbs ట్రీట్స్."],
+      ["ఎగ్‌లెస్ ఫేవరెట్","ఎగ్‌లెస్ కప్‌కేక్ స్పెషల్","సాఫ్ట్, ఫ్లఫీ మరియు ఎగ్‌లెస్ — ప్రతి వేడుకకు ఈరోజు ఫేవరెట్."],
+      ["ప్రీమియం పిక్","ఈరోజు ప్రీమియం టార్ట్","క్రిస్పీ పేస్ట్రీ షెల్‌లో సిల్కీ చాక్లెట్ ఫిల్లింగ్."],
+      ["₹500 లోపు","మినీ సెలబ్రేషన్ బాక్స్","చిన్న బాక్స్, పెద్ద ఆనందం — ₹500 లోపు ఈరోజు సెలబ్రేషన్ పిక్."]
+    ][storyIndex];
+    return {label:a[0],title:a[1],text:a[2]};
+  }
+  return {label:s.label,title:s.title,text:s.text};
+}
+
+function renderStory(){
+  const s=stories[storyIndex];
+  document.getElementById("storyImage").src=s.img;
+  document.getElementById("storyAvatar").src=s.img;
+  const ls=localizedStory(s);
+  document.getElementById("storyLabel").textContent=ls.label;
+  document.getElementById("storyTitle").textContent=ls.title;
+  document.getElementById("storyText").textContent=ls.text;
+  const bars=document.getElementById("storyBars");
+  bars.innerHTML=stories.map((_,i)=>`<div class="story-bar ${i<storyIndex?"done":""} ${i===storyIndex?"current":""}"><span></span></div>`).join("");
+  clearTimeout(storyTimer);
+  storyTimer=setTimeout(()=>storyNext(true),4500);
+}
+function storyNext(auto=false){
+  if(storyIndex<stories.length-1){storyIndex++;markStorySeen(storyIndex);renderStory()}
+  else if(auto){closeStory()}
+}
+function storyPrev(){
+  if(storyIndex>0){storyIndex--;renderStory()}
+}
+function closeStory(){
+  clearTimeout(storyTimer);
+  document.getElementById("storyOverlay").classList.remove("show");
+  document.body.style.overflow="";
+}
+function storyOrder(){
+  const p=products.find(x=>x.id===stories[storyIndex].product);
+  closeStory();
+  if(p){add(p.id);openCart()}
+}
+
+
+/* Sweet Crumbs multi-language support: English, Tamil, Hindi, Telugu */
+const translations={
+en:{
+language:"Language",weekendSpecial:"Weekend Special: 10% OFF on orders above ₹799",trustLine:"Freshly baked • Own delivery team • Live tracking",
+orders:"Orders",account:"Account",neighbourhoodBakery:"Your neighbourhood bakery",heroTitle:"Made fresh.<br><span>Delivered with care.</span>",
+heroText:"Order celebration cakes, artisan breads, pastries and seasonal specials from Sweet Crumbs. Choose your delivery slot, add special handling instructions and track your own delivery partner live.",
+orderNow:"Order now →",trackMyOrder:"Track my order",freshlyBaked:"✓ Freshly baked",securePay:"✓ Secure UPI/COD",ownDelivery:"✓ Own delivery team",
+customerRating:"4.9 ★ customer rating",happyCustomers:"Thousands of happy celebrations",explore:"Explore Sweet Crumbs",exploreSub:"Quickly jump into what you're craving",
+cakes:"🎂 Cakes",pastries:"🥐 Pastries",breads:"🍞 Breads",festive:"🎁 Festive",eggless:"🌱 Eggless",premium:"✨ Premium",under500:"₹500 & below",
+bestSellers:"Best sellers near you",freshPicks:"Fresh picks, rated by our customers",freshOptions:"12 fresh options available",cakesPlain:"Cakes",pastriesPlain:"Pastries",breadsPlain:"Breads",
+seasonal:"Seasonal",egglessPlain:"Eggless",premiumPlain:"Premium",under500Plain:"Under ₹500",rating45:"4.5+ ★",sweetDeal:"Sweet deal for your next order 🎉",
+couponText:"Get 10% off on eligible orders. One click to apply at checkout.",applyCoupon:"SWEET10 · Apply",freshlyBakedTitle:"Freshly baked",
+freshlyBakedText:"Prepared in small batches for better freshness and taste.",qualityCheckedTitle:"Quality checked",qualityCheckedText:"Every order is checked before it leaves our bakery.",
+ownDeliveryTitle:"Own delivery team",ownDeliveryText:"No third-party riders. Your cake is handled by our team.",liveTrackingTitle:"Live tracking",liveTrackingText:"Know who accepted your order and where it is.",
+reviewsTitle:"What customers say",reviewsSub:"Real-feeling review experience for the prototype",yourOrders:"Your Orders",ordersSub:"Track active deliveries, reorder favourites and view past orders.",
+trackOrder:"Track Order",trackSub:"Real-time delivery view for your Sweet Crumbs order.",profileSub:"Manage your Sweet Crumbs profile, addresses and preferences.",
+adminDashboard:"Admin Dashboard",adminSub:"Prototype admin portal for bakery operations.",deliveryPartner:"Delivery Partner",deliverySub:"Operational screen for your own delivery team.",
+checkout:"Checkout",deliveryAddress:"Delivery address",deliverySlot:"Delivery slot",handlingInstructions:"Special cake handling instructions",paymentMethod:"Payment method",
+cod:"Cash on Delivery",placeOrder:"Place order securely →",orderConfirmed:"Order confirmed!",orderAccepted:"Your Sweet Crumbs order has been accepted by the bakery.",
+viewOrders:"View all orders",support:"Sweet Crumbs Support",yourCart:"Your cart",proceedCheckout:"Proceed to checkout →",discover:"Discover",customer:"Customer",business:"Business",
+myOrders:"My Orders",supportShort:"Support",adminPortal:"Admin Portal",searchPlaceholder:"Search cakes, pastries, breads..."
+},
+ta:{
+language:"மொழி",weekendSpecial:"🔥 வார இறுதி சிறப்பு: ₹799-க்கு மேல் ஆர்டர்களுக்கு 10% தள்ளுபடி",trustLine:"புதியதாக சுடப்பட்டது • எங்கள் டெலிவரி குழு • நேரடி கண்காணிப்பு",
+orders:"ஆர்டர்கள்",account:"கணக்கு",neighbourhoodBakery:"உங்கள் அருகிலுள்ள பேக்கரி",heroTitle:"புதியதாக தயாரிப்பு.<br><span>அக்கறையுடன் டெலிவரி.</span>",
+heroText:"Sweet Crumbs-ல் கேக்குகள், ஆர்டிசன் பிரெட்கள், பேஸ்ட்ரிகள் மற்றும் சீசனல் ஸ்பெஷல்களை ஆர்டர் செய்யுங்கள். டெலிவரி நேரத்தை தேர்வு செய்து, கேக் கையாளும் குறிப்புகளைச் சேர்த்து, டெலிவரியை நேரடியாக கண்காணிக்கலாம்.",
+orderNow:"இப்போது ஆர்டர் செய்க →",trackMyOrder:"என் ஆர்டரை கண்காணி",freshlyBaked:"✓ புதிதாக சுடப்பட்டது",securePay:"✓ பாதுகாப்பான UPI/COD",ownDelivery:"✓ எங்கள் டெலிவரி குழு",
+customerRating:"4.9 ★ வாடிக்கையாளர் மதிப்பீடு",happyCustomers:"ஆயிரக்கணக்கான மகிழ்ச்சியான கொண்டாட்டங்கள்",explore:"Sweet Crumbs-ஐ பாருங்கள்",exploreSub:"உங்களுக்கு பிடித்ததை விரைவாக தேர்வு செய்யுங்கள்",
+cakes:"🎂 கேக்குகள்",pastries:"🥐 பேஸ்ட்ரிகள்",breads:"🍞 பிரெட்கள்",festive:"🎁 விழாக்காலம்",eggless:"🌱 முட்டையில்லாதவை",premium:"✨ பிரீமியம்",under500:"₹500 மற்றும் கீழ்",
+bestSellers:"உங்களுக்கு அருகிலுள்ள சிறந்தவை",freshPicks:"வாடிக்கையாளர் மதிப்பீட்டுடன் புதிய தேர்வுகள்",freshOptions:"12 புதிய தேர்வுகள் உள்ளன",cakesPlain:"கேக்குகள்",pastriesPlain:"பேஸ்ட்ரிகள்",breadsPlain:"பிரெட்கள்",
+seasonal:"சீசனல்",egglessPlain:"முட்டையில்லாதவை",premiumPlain:"பிரீமியம்",under500Plain:"₹500-க்கு கீழ்",rating45:"4.5+ ★",sweetDeal:"உங்கள் அடுத்த ஆர்டருக்கான இனிய சலுகை 🎉",
+couponText:"தகுதியான ஆர்டர்களுக்கு 10% தள்ளுபடி. Checkout-ல் ஒரே கிளிக்கில் பயன்படுத்தலாம்.",applyCoupon:"SWEET10 · பயன்படுத்துக",freshlyBakedTitle:"புதிதாக சுடப்பட்டது",
+freshlyBakedText:"சுவை மற்றும் புத்துணர்ச்சிக்காக சிறிய அளவுகளில் தயாரிக்கப்படுகிறது.",qualityCheckedTitle:"தர சோதனை செய்யப்பட்டது",qualityCheckedText:"பேக்கரியை விட்டு செல்லும் முன் ஒவ்வொரு ஆர்டரும் சோதிக்கப்படுகிறது.",
+ownDeliveryTitle:"எங்கள் டெலிவரி குழு",ownDeliveryText:"மூன்றாம் தரப்பு ரைடர்கள் இல்லை. உங்கள் கேக்கை எங்கள் குழு கவனமாக கையாளும்.",liveTrackingTitle:"நேரடி கண்காணிப்பு",liveTrackingText:"உங்கள் ஆர்டரை யார் எடுத்தார்கள், அது எங்கே உள்ளது என்பதை அறியலாம்.",
+reviewsTitle:"வாடிக்கையாளர்கள் சொல்வது",reviewsSub:"இந்த prototype-க்கான மதிப்பீட்டு அனுபவம்",yourOrders:"உங்கள் ஆர்டர்கள்",ordersSub:"செயலில் உள்ள டெலிவரிகளை கண்காணித்து, பிடித்த ஆர்டர்களை மீண்டும் செய்யுங்கள்.",
+trackOrder:"ஆர்டரை கண்காணி",trackSub:"உங்கள் Sweet Crumbs ஆர்டரின் நேரடி டெலிவரி நிலை.",profileSub:"உங்கள் Sweet Crumbs சுயவிவரம், முகவரிகள் மற்றும் விருப்பங்களை நிர்வகிக்கவும்.",
+adminDashboard:"நிர்வாகி டாஷ்போர்டு",adminSub:"பேக்கரி செயல்பாடுகளுக்கான நிர்வாக prototype.",deliveryPartner:"டெலிவரி பார்ட்னர்",deliverySub:"எங்கள் டெலிவரி குழுவிற்கான செயல்பாட்டு திரை.",
+checkout:"Checkout",deliveryAddress:"டெலிவரி முகவரி",deliverySlot:"டெலிவரி நேரம்",handlingInstructions:"கேக் கையாளும் சிறப்பு குறிப்புகள்",paymentMethod:"பணம் செலுத்தும் முறை",
+cod:"டெலிவரி நேரத்தில் பணம்",placeOrder:"பாதுகாப்பாக ஆர்டர் செய்க →",orderConfirmed:"ஆர்டர் உறுதி செய்யப்பட்டது!",orderAccepted:"உங்கள் Sweet Crumbs ஆர்டரை பேக்கரி ஏற்றுக்கொண்டது.",
+viewOrders:"அனைத்து ஆர்டர்களையும் காண்க",support:"Sweet Crumbs உதவி",yourCart:"உங்கள் கார்ட்",proceedCheckout:"Checkout-க்கு செல்லவும் →",discover:"கண்டறியுங்கள்",customer:"வாடிக்கையாளர்",business:"வணிகம்",
+myOrders:"என் ஆர்டர்கள்",supportShort:"உதவி",adminPortal:"நிர்வாகி போர்டல்",searchPlaceholder:"கேக்குகள், பேஸ்ட்ரிகள், பிரெட்கள் தேடுங்கள்..."
+},
+hi:{
+language:"भाषा",weekendSpecial:"🔥 वीकेंड स्पेशल: ₹799 से ऊपर के ऑर्डर पर 10% छूट",trustLine:"ताज़ा बेक किया • हमारी डिलीवरी टीम • लाइव ट्रैकिंग",
+orders:"ऑर्डर",account:"खाता",neighbourhoodBakery:"आपकी नज़दीकी बेकरी",heroTitle:"ताज़ा बनाया।<br><span>सावधानी से डिलीवर किया।</span>",
+heroText:"Sweet Crumbs से सेलिब्रेशन केक, आर्टिसन ब्रेड, पेस्ट्री और सीज़नल स्पेशल ऑर्डर करें। डिलीवरी स्लॉट चुनें, केक हैंडलिंग निर्देश जोड़ें और अपनी डिलीवरी को लाइव ट्रैक करें।",
+orderNow:"अभी ऑर्डर करें →",trackMyOrder:"मेरा ऑर्डर ट्रैक करें",freshlyBaked:"✓ ताज़ा बेक किया",securePay:"✓ सुरक्षित UPI/COD",ownDelivery:"✓ हमारी डिलीवरी टीम",
+customerRating:"4.9 ★ ग्राहक रेटिंग",happyCustomers:"हज़ारों खुश ग्राहक",explore:"Sweet Crumbs देखें",exploreSub:"अपनी पसंद जल्दी चुनें",
+cakes:"🎂 केक",pastries:"🥐 पेस्ट्री",breads:"🍞 ब्रेड",festive:"🎁 फेस्टिव",eggless:"🌱 एगलेस",premium:"✨ प्रीमियम",under500:"₹500 और कम",
+bestSellers:"आपके पास बेस्ट सेलर्स",freshPicks:"ग्राहक रेटिंग वाले ताज़ा विकल्प",freshOptions:"12 ताज़ा विकल्प उपलब्ध",cakesPlain:"केक",pastriesPlain:"पेस्ट्री",breadsPlain:"ब्रेड",
+seasonal:"सीज़नल",egglessPlain:"एगलेस",premiumPlain:"प्रीमियम",under500Plain:"₹500 से कम",rating45:"4.5+ ★",sweetDeal:"आपके अगले ऑर्डर के लिए शानदार ऑफर 🎉",
+couponText:"योग्य ऑर्डर पर 10% छूट। Checkout पर एक क्लिक में लागू करें।",applyCoupon:"SWEET10 · लागू करें",freshlyBakedTitle:"ताज़ा बेक किया",
+freshlyBakedText:"बेहतर ताज़गी और स्वाद के लिए छोटे बैच में तैयार किया जाता है।",qualityCheckedTitle:"गुणवत्ता जांची गई",qualityCheckedText:"बेकरी से निकलने से पहले हर ऑर्डर की जांच की जाती है।",
+ownDeliveryTitle:"हमारी डिलीवरी टीम",ownDeliveryText:"कोई थर्ड-पार्टी राइडर नहीं। आपका केक हमारी टीम संभालती है।",liveTrackingTitle:"लाइव ट्रैकिंग",liveTrackingText:"जानें कि आपका ऑर्डर किसने लिया और वह कहाँ है।",
+reviewsTitle:"ग्राहक क्या कहते हैं",reviewsSub:"इस prototype के लिए समीक्षा अनुभव",yourOrders:"आपके ऑर्डर",ordersSub:"सक्रिय डिलीवरी ट्रैक करें, पसंदीदा ऑर्डर दोबारा करें।",
+trackOrder:"ऑर्डर ट्रैक करें",trackSub:"आपके Sweet Crumbs ऑर्डर की रियल-टाइम डिलीवरी जानकारी।",profileSub:"अपनी Sweet Crumbs प्रोफ़ाइल, पते और पसंद प्रबंधित करें।",
+adminDashboard:"एडमिन डैशबोर्ड",adminSub:"बेकरी संचालन के लिए एडमिन prototype.",deliveryPartner:"डिलीवरी पार्टनर",deliverySub:"हमारी डिलीवरी टीम के लिए ऑपरेशनल स्क्रीन।",
+checkout:"चेकआउट",deliveryAddress:"डिलीवरी पता",deliverySlot:"डिलीवरी स्लॉट",handlingInstructions:"केक संभालने के विशेष निर्देश",paymentMethod:"भुगतान का तरीका",
+cod:"कैश ऑन डिलीवरी",placeOrder:"सुरक्षित रूप से ऑर्डर करें →",orderConfirmed:"ऑर्डर कन्फर्म हो गया!",orderAccepted:"आपका Sweet Crumbs ऑर्डर बेकरी ने स्वीकार कर लिया है।",
+viewOrders:"सभी ऑर्डर देखें",support:"Sweet Crumbs सहायता",yourCart:"आपकी कार्ट",proceedCheckout:"चेकआउट पर जाएँ →",discover:"खोजें",customer:"ग्राहक",business:"बिज़नेस",
+myOrders:"मेरे ऑर्डर",supportShort:"सहायता",adminPortal:"एडमिन पोर्टल",searchPlaceholder:"केक, पेस्ट्री, ब्रेड खोजें..."
+},
+te:{
+language:"భాష",weekendSpecial:"🔥 వీకెండ్ స్పెషల్: ₹799 పైబడిన ఆర్డర్లపై 10% తగ్గింపు",trustLine:"తాజాగా బేక్ చేసినవి • మా డెలివరీ టీమ్ • లైవ్ ట్రాకింగ్",
+orders:"ఆర్డర్లు",account:"ఖాతా",neighbourhoodBakery:"మీ సమీపంలోని బేకరీ",heroTitle:"తాజాగా తయారు చేశాం.<br><span>జాగ్రత్తగా డెలివరీ చేస్తాం.</span>",
+heroText:"Sweet Crumbs నుండి సెలబ్రేషన్ కేకులు, ఆర్టిసన్ బ్రెడ్లు, పేస్ట్రీలు మరియు సీజనల్ స్పెషల్స్ ఆర్డర్ చేయండి. డెలివరీ స్లాట్ ఎంచుకుని, కేక్ హ్యాండ్లింగ్ సూచనలు జోడించి లైవ్‌గా ట్రాక్ చేయండి.",
+orderNow:"ఇప్పుడే ఆర్డర్ చేయండి →",trackMyOrder:"నా ఆర్డర్‌ను ట్రాక్ చేయండి",freshlyBaked:"✓ తాజాగా బేక్ చేసినవి",securePay:"✓ సురక్షిత UPI/COD",ownDelivery:"✓ మా డెలివరీ టీమ్",
+customerRating:"4.9 ★ కస్టమర్ రేటింగ్",happyCustomers:"వేలాది సంతోషమైన వేడుకలు",explore:"Sweet Crumbs చూడండి",exploreSub:"మీకు కావాల్సినది త్వరగా ఎంచుకోండి",
+cakes:"🎂 కేకులు",pastries:"🥐 పేస్ట్రీలు",breads:"🍞 బ్రెడ్లు",festive:"🎁 ఫెస్టివ్",eggless:"🌱 ఎగ్‌లెస్",premium:"✨ ప్రీమియం",under500:"₹500 మరియు తక్కువ",
+bestSellers:"మీ దగ్గర బెస్ట్ సెల్లర్స్",freshPicks:"కస్టమర్ రేటింగ్‌లతో తాజా ఎంపికలు",freshOptions:"12 తాజా ఎంపికలు",cakesPlain:"కేకులు",pastriesPlain:"పేస్ట్రీలు",breadsPlain:"బ్రెడ్లు",
+seasonal:"సీజనల్",egglessPlain:"ఎగ్‌లెస్",premiumPlain:"ప్రీమియం",under500Plain:"₹500 లోపు",rating45:"4.5+ ★",sweetDeal:"మీ తదుపరి ఆర్డర్ కోసం స్వీట్ డీల్ 🎉",
+couponText:"అర్హత ఉన్న ఆర్డర్లపై 10% తగ్గింపు. Checkout వద్ద ఒక క్లిక్‌తో ఉపయోగించండి.",applyCoupon:"SWEET10 · వర్తించండి",freshlyBakedTitle:"తాజాగా బేక్ చేసినవి",
+freshlyBakedText:"మంచి తాజాదనం మరియు రుచికి చిన్న బ్యాచ్‌లలో తయారు చేస్తాం.",qualityCheckedTitle:"క్వాలిటీ చెక్",qualityCheckedText:"బేకరీ నుంచి పంపే ముందు ప్రతి ఆర్డర్‌ను చెక్ చేస్తాం.",
+ownDeliveryTitle:"మా డెలివరీ టీమ్",ownDeliveryText:"థర్డ్ పార్టీ రైడర్లు లేరు. మీ కేక్‌ను మా టీమ్ జాగ్రత్తగా నిర్వహిస్తుంది.",liveTrackingTitle:"లైవ్ ట్రాకింగ్",liveTrackingText:"మీ ఆర్డర్‌ను ఎవరు తీసుకున్నారు, అది ఎక్కడ ఉందో తెలుసుకోండి.",
+reviewsTitle:"కస్టమర్లు ఏమంటున్నారు",reviewsSub:"ఈ prototype కోసం రివ్యూ అనుభవం",yourOrders:"మీ ఆర్డర్లు",ordersSub:"యాక్టివ్ డెలివరీలను ట్రాక్ చేసి, ఇష్టమైన ఆర్డర్లను మళ్లీ చేయండి.",
+trackOrder:"ఆర్డర్ ట్రాక్ చేయండి",trackSub:"మీ Sweet Crumbs ఆర్డర్‌కు రియల్-టైమ్ డెలివరీ సమాచారం.",profileSub:"మీ Sweet Crumbs ప్రొఫైల్, చిరునామాలు మరియు ప్రాధాన్యతలను నిర్వహించండి.",
+adminDashboard:"అడ్మిన్ డ్యాష్‌బోర్డ్",adminSub:"బేకరీ కార్యకలాపాల కోసం అడ్మిన్ prototype.",deliveryPartner:"డెలివరీ పార్ట్నర్",deliverySub:"మా డెలివరీ టీమ్ కోసం ఆపరేషనల్ స్క్రీన్.",
+checkout:"చెక్‌అవుట్",deliveryAddress:"డెలివరీ చిరునామా",deliverySlot:"డెలివరీ స్లాట్",handlingInstructions:"కేక్ హ్యాండ్లింగ్ ప్రత్యేక సూచనలు",paymentMethod:"చెల్లింపు విధానం",
+cod:"క్యాష్ ఆన్ డెలివరీ",placeOrder:"సురక్షితంగా ఆర్డర్ చేయండి →",orderConfirmed:"ఆర్డర్ నిర్ధారించబడింది!",orderAccepted:"మీ Sweet Crumbs ఆర్డర్‌ను బేకరీ అంగీకరించింది.",
+viewOrders:"అన్ని ఆర్డర్లు చూడండి",support:"Sweet Crumbs సహాయం",yourCart:"మీ కార్ట్",proceedCheckout:"చెక్‌అవుట్‌కు వెళ్లండి →",discover:"కనుగొనండి",customer:"కస్టమర్",business:"బిజినెస్",
+myOrders:"నా ఆర్డర్లు",supportShort:"సహాయం",adminPortal:"అడ్మిన్ పోర్టల్",searchPlaceholder:"కేకులు, పేస్ట్రీలు, బ్రెడ్లు వెతకండి..."
+}
+};
+
+const productTranslations={
+ta:{
+1:["சாக்லேட் கொண்டாட்ட கேக்","சாக்லேட் ஸ்பாஞ்ச், மென்மையான சாக்லேட் கிரீம் மற்றும் கொண்டாட்ட அலங்காரம்."],
+2:["ஸ்ட்ராபெரி ஃப்ரெஷ் கிரீம்","லேசான வெனில்லா ஸ்பாஞ்ச், புதிய ஸ்ட்ராபெரிகள் மற்றும் விப்ட் கிரீம்."],
+3:["ரெட் வெல்வெட் ட்ரீம்","மென்மையான ரெட் வெல்வெட் ஸ்பாஞ்ச் மற்றும் கிரீம் சீஸ் ஃப்ராஸ்டிங்."],
+4:["பட்டர்ஸ்காட்ச் கிரஞ்ச் கேக்","கிளாசிக் பட்டர்ஸ்காட்ச் கேக் மற்றும் கேரமல் கிரஞ்ச்."],
+5:["பட்டர் குரோசாங்","வெண்ணெய் நிறைந்த, அடுக்கான பிரெஞ்ச் ஸ்டைல் குரோசாங்."],
+6:["சாக்லேட் டேனிஷ்","சாக்லேட் நிரப்பப்பட்ட பொன்னிற டேனிஷ் பேஸ்ட்ரி."],
+7:["ஆல்மண்ட் குரோசாங்","பாதாம் டாப்பிங் மற்றும் வெண்ணெய் அடுக்குகளுடன் தயாரிக்கப்பட்டது."],
+8:["கிளாசிக் சவர்டோ","கிரிஸ்பியான மேற்பரப்புடன் மெதுவாக புளிக்கவைத்த ஆர்டிசன் சவர்டோ."],
+9:["ஃபிரெஞ்ச் பாகெட்","புதியதாக சுடப்பட்ட கிளாசிக் கிரிஸ்பி பாகெட்."],
+10:["விழாக்கால கிஃப்ட் பாக்ஸ்","பரிசளிக்க அழகாக பேக் செய்யப்பட்ட விழாக்கால ஸ்வீட் ட்ரீட்ஸ்."],
+11:["மினி கொண்டாட்ட பாக்ஸ்","சிறிய கொண்டாட்டங்களுக்கு சரியான சிறிய பாக்ஸ்."],
+12:["பிரீமியம் சாக்லேட் டார்ட்","கிரிஸ்பியான பேஸ்ட்ரி ஷெல்லில் சில்கி சாக்லேட் ஃபில்லிங்."]
+},
+hi:{
+1:["चॉकलेट सेलिब्रेशन केक","रिच चॉकलेट स्पॉन्ज, स्मूद चॉकलेट क्रीम और सेलिब्रेशन फिनिश।"],
+2:["स्ट्रॉबेरी फ्रेश क्रीम","हल्का वनीला स्पॉन्ज, ताज़ी स्ट्रॉबेरी और व्हिप्ड क्रीम।"],
+3:["रेड वेलवेट ड्रीम","सॉफ्ट रेड वेलवेट स्पॉन्ज और क्रीमी चीज़ फ्रॉस्टिंग।"],
+4:["बटरस्कॉच क्रंच केक","क्लासिक बटरस्कॉच केक और कैरामेल क्रंच।"],
+5:["बटर क्रोइसां","बटर से बना फ्लेकी फ्रेंच-स्टाइल क्रोइसां।"],
+6:["चॉकलेट डैनिश","रिच चॉकलेट सेंटर वाला गोल्डन डैनिश पेस्ट्री।"],
+7:["आल्मंड क्रोइसां","क्रिस्पी आल्मंड टॉपिंग और बटर वाली लेयर्स।"],
+8:["क्लासिक सॉरडो","क्रिस्पी क्रस्ट वाला स्लो-फर्मेंटेड आर्टिसन सॉरडो।"],
+9:["फ्रेंच बैगेट","ताज़ा बेक किया हुआ क्लासिक क्रिस्पी बैगेट।"],
+10:["फेस्टिवल गिफ्ट बॉक्स","गिफ्टिंग के लिए खूबसूरती से पैक किए गए फेस्टिव ट्रीट्स।"],
+11:["मिनी सेलिब्रेशन बॉक्स","छोटी खुशियों के लिए कॉम्पैक्ट सेलिब्रेशन बॉक्स।"],
+12:["प्रीमियम चॉकलेट टार्ट","क्रिस्पी पेस्ट्री शेल में सिल्की चॉकलेट फिलिंग।"]
+},
+te:{
+1:["చాక్లెట్ సెలబ్రేషన్ కేక్","రిచ్ చాక్లెట్ స్పాంజ్, స్మూత్ చాక్లెట్ క్రీమ్ మరియు సెలబ్రేషన్ ఫినిష్."],
+2:["స్ట్రాబెర్రీ ఫ్రెష్ క్రీమ్","లైట్ వనిల్లా స్పాంజ్, తాజా స్ట్రాబెర్రీలు మరియు విప్డ్ క్రీమ్."],
+3:["రెడ్ వెల్వెట్ డ్రీమ్","సాఫ్ట్ రెడ్ వెల్వెట్ స్పాంజ్ మరియు క్రీమీ చీజ్ ఫ్రాస్టింగ్."],
+4:["బటర్‌స్కాచ్ క్రంచ్ కేక్","క్లాసిక్ బటర్‌స్కాచ్ కేక్ మరియు క్యారమెల్ క్రంచ్."],
+5:["బట్టర్ క్రొయిసాంట్","బట్టర్‌తో తయారైన ఫ్లేకీ ఫ్రెంచ్-స్టైల్ క్రొయిసాంట్."],
+6:["చాక్లెట్ డానిష్","రిచ్ చాక్లెట్ సెంటర్‌తో గోల్డెన్ డానిష్ పేస్ట్రీ."],
+7:["ఆల్మండ్ క్రొయిసాంట్","క్రిస్పీ ఆల్మండ్ టాపింగ్ మరియు బట్టరీ లేయర్స్."],
+8:["క్లాసిక్ సవర్డో","క్రిస్పీ క్రస్ట్‌తో స్లో-ఫెర్మెంటెడ్ ఆర్టిసన్ సవర్డో."],
+9:["ఫ్రెంచ్ బాగెట్","తాజాగా బేక్ చేసిన క్లాసిక్ క్రిస్పీ బాగెట్."],
+10:["ఫెస్టివల్ గిఫ్ట్ బాక్స్","గిఫ్టింగ్ కోసం అందంగా ప్యాక్ చేసిన ఫెస్టివల్ ట్రీట్స్."],
+11:["మినీ సెలబ్రేషన్ బాక్స్","చిన్న వేడుకలకు సరైన కాంపాక్ట్ బాక్స్."],
+12:["ప్రీమియం చాక్లెట్ టార్ట్","క్రిస్పీ పేస్ట్రీ షెల్‌లో సిల్కీ చాక్లెట్ ఫిల్లింగ్."]
+}
+};
+
+let currentLanguage=(localStorage.getItem('sc_language')||'en');
+function t(key){return (translations[currentLanguage]&&translations[currentLanguage][key])||translations.en[key]||key}
+function setLanguage(lang){
+  if(!translations[lang])lang="en";
+  currentLanguage=lang;
+  localStorage.setItem('sc_language',lang);
+  document.documentElement.lang=lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>el.innerHTML=t(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>el.placeholder=t(el.dataset.i18nPlaceholder));
+  const a=document.getElementById("languageSelect"), b=document.getElementById("mobileLanguageSelect");
+  if(a)a.value=lang;if(b)b.value=lang;
+  // Re-render dynamic product cards, cart, orders and story text in the selected language.
+  renderFiltered(); updateCart(); renderOrders();
+  if(typeof renderStory==="function" && document.getElementById("storyOverlay").classList.contains("show")) renderStory();
+  toast(lang==="ta"?"மொழி மாற்றப்பட்டது":lang==="hi"?"भाषा बदल दी गई":lang==="te"?"భాష మార్చబడింది":"Language changed");
+}
+function localizedProduct(p){
+  const tr=productTranslations[currentLanguage]?.[p.id];
+  return tr?{...p,name:tr[0],desc:tr[1]}:p;
+}
+
+render();updateCart();renderOrders();
+setLanguage(currentLanguage);
+document.getElementById("products").addEventListener("dblclick",e=>{let card=e.target.closest(".card");if(card){let h=card.querySelector("h3")?.textContent;let p=products.find(x=>x.name===h);if(p)openProduct(p.id)}})
+</script>
+</body>
+</html>
